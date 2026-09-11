@@ -1,730 +1,418 @@
 import { useEffect, useState } from "react";
 import {
   Activity,
+  ArrowRight,
   BrainCircuit,
   CheckCircle2,
-  ChevronRight,
-  CircleGauge,
   CreditCard,
   Database,
+  FileSearch,
   GitBranch,
+  Layers3,
   Mail,
-  MapPin,
+  MessageCircle,
+  Search,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
   Target,
   Workflow,
   Zap,
+  LockKeyhole,
 } from "lucide-react";
 
 const ModelInsights = () => {
   const [visible, setVisible] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     setVisible(true);
   }, []);
 
-  const features = [
-    {
-      name: "TransactionDT",
-      category: "Transaction",
-      description: "Time elapsed since the reference transaction.",
-    },
-    {
-      name: "TransactionAmt",
-      category: "Transaction",
-      description: "Monetary value of the transaction.",
-    },
-    {
-      name: "ProductCD",
-      category: "Transaction",
-      description: "Product category associated with the transaction.",
-    },
-    {
-      name: "card1",
-      category: "Card",
-      description: "Primary card identifier.",
-    },
-    {
-      name: "card2",
-      category: "Card",
-      description: "Secondary card-related identifier.",
-    },
-    {
-      name: "card3",
-      category: "Card",
-      description: "Card verification or category identifier.",
-    },
-    {
-      name: "card4",
-      category: "Card",
-      description: "Card network or provider.",
-    },
-    {
-      name: "card5",
-      category: "Card",
-      description: "Additional card identifier.",
-    },
-    {
-      name: "card6",
-      category: "Card",
-      description: "Card type or payment category.",
-    },
-    {
-      name: "addr1",
-      category: "Address",
-      description: "Primary address region information.",
-    },
-    {
-      name: "addr2",
-      category: "Address",
-      description: "Secondary address region information.",
-    },
-    {
-      name: "P_emaildomain",
-      category: "Email",
-      description: "Purchaser email domain.",
-    },
-    {
-      name: "R_emaildomain",
-      category: "Email",
-      description: "Recipient email domain.",
-    },
-    {
-      name: "has_R_emaildomain",
-      category: "Email",
-      description: "Indicates whether a recipient email is available.",
-    },
+  const modelFeatures = [
+    ["TransactionDT", "Transaction", "Captures the time relationship of the transaction."],
+    ["TransactionAmt", "Transaction", "Represents the monetary value being evaluated."],
+    ["ProductCD", "Transaction", "Identifies the product category associated with the payment."],
+    ["card1 – card6", "Card", "Provides card-related identifiers and payment characteristics."],
+    ["addr1 – addr2", "Address", "Adds address-region signals to the transaction profile."],
+    ["P_emaildomain", "Email", "Represents the purchaser email domain."],
+    ["R_emaildomain", "Email", "Represents the recipient email domain when available."],
+    ["has_R_emaildomain", "Email", "Indicates whether recipient email information exists."],
   ];
 
-  const categories = [
-    { name: "All", icon: Database },
-    { name: "Transaction", icon: Activity },
-    { name: "Card", icon: CreditCard },
-    { name: "Address", icon: MapPin },
-    { name: "Email", icon: Mail },
+  const ragSteps = [
+    {
+      number: "01",
+      icon: MessageCircle,
+      title: "Question",
+      text: "The user asks a fraud or payment-safety question.",
+    },
+    {
+      number: "02",
+      icon: Sparkles,
+      title: "Embedding",
+      text: "The question is converted into a semantic vector representation.",
+    },
+    {
+      number: "03",
+      icon: Search,
+      title: "Retrieval",
+      text: "MongoDB Vector Search finds the most relevant knowledge chunks.",
+    },
+    {
+      number: "04",
+      icon: BrainCircuit,
+      title: "Generation",
+      text: "The retrieved context is supplied to the LLM to form the response.",
+    },
   ];
-
-  const filteredFeatures =
-    activeCategory === "All"
-      ? features
-      : features.filter((feature) => feature.category === activeCategory);
-
-  const categoryStyles = {
-    Transaction:
-      "border-blue-200 bg-blue-50 text-blue-700",
-    Card:
-      "border-violet-200 bg-violet-50 text-violet-700",
-    Address:
-      "border-amber-200 bg-amber-50 text-amber-700",
-    Email:
-      "border-emerald-200 bg-emerald-50 text-emerald-700",
-  };
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] pt-20">
-      {/* ================= HEADER ================= */}
-
+    <main className="min-h-screen bg-[#f7f9fc] pt-20 text-slate-900">
+      {/* INTRO */}
       <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-7 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-12">
           <div
-            className={`transition-all duration-700 ${
-              visible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-5 opacity-0"
+            className={`flex flex-col gap-5 transition-all duration-700 lg:flex-row lg:items-end lg:justify-between ${
+              visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-white">
-                <BrainCircuit size={16} />
+            <div className="max-w-3xl">
+              <div className="mb-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                FraudLens AI · Technology
               </div>
 
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
-                Machine Learning Intelligence
-              </span>
+              <p className="text-2xl font-bold leading-tight tracking-tight text-slate-950 sm:text-3xl">
+                Intelligent transaction analysis combined with
+                knowledge-grounded fraud safety.
+              </p>
 
-              <div className="ml-1 flex items-center gap-1.5 rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                </span>
-
-                <span className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">
-                  Model Active
-                </span>
-              </div>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
+                FraudLens separates prediction from guidance. The machine
+                learning service evaluates transaction signals, while the RAG
+                assistant retrieves relevant safety knowledge and explains it
+                conversationally.
+              </p>
             </div>
 
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-              Model Insights
-            </h1>
-
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
-              Explore how the FraudLens AI model evaluates transaction data
-              and converts machine learning predictions into actionable risk
-              assessments.
-            </p>
+            <div className="flex shrink-0 items-center gap-2 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3">
+              <CheckCircle2 size={17} className="text-emerald-600" />
+              <div>
+                <p className="text-xs font-bold text-emerald-700">System operational</p>
+                <p className="text-[10px] text-emerald-600/80">
+                  ML prediction + RAG guidance
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:px-10">
-
-        {/* ================= MODEL STATS ================= */}
-
-        <section
-          className={`grid grid-cols-2 gap-3 lg:grid-cols-4 transition-all delay-100 duration-700 ${
-            visible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-5 opacity-0"
-          }`}
-        >
-          <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-50 text-violet-600">
-              <BrainCircuit size={18} />
-            </div>
-
-            <div>
-              <p className="text-sm font-bold text-slate-900">
-                CatBoost
-              </p>
-              <p className="text-[11px] text-slate-500">
-                ML Algorithm
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
-              <SlidersHorizontal size={18} />
-            </div>
-
-            <div>
-              <p className="text-xl font-bold leading-none text-slate-900">
-                14
-              </p>
-              <p className="mt-1 text-[11px] text-slate-500">
-                Input Features
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-600">
-              <Target size={18} />
-            </div>
-
-            <div>
-              <p className="text-xl font-bold leading-none text-slate-900">
-                30%
-              </p>
-              <p className="mt-1 text-[11px] text-slate-500">
-                Fraud Threshold
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-              <CheckCircle2 size={18} />
-            </div>
-
-            <div>
-              <p className="text-sm font-bold text-emerald-600">
-                Operational
-              </p>
-              <p className="text-[11px] text-slate-500">
-                Model Status
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= MODEL OVERVIEW + DECISION ================= */}
-
-        <section
-          className={`mt-6 grid gap-5 lg:grid-cols-[1.25fr_.75fr] transition-all delay-200 duration-700 ${
-            visible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-6 opacity-0"
-          }`}
-        >
-          {/* MODEL OVERVIEW */}
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <Sparkles size={17} className="text-orange-500" />
-
-                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                    Model Overview
-                  </span>
+      {/* TWO SYSTEMS */}
+      <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+        <div className="grid gap-5 lg:grid-cols-2">
+          <article className="overflow-hidden rounded-3xl border border-orange-100 bg-white shadow-sm">
+            <div className="border-b border-orange-100 bg-orange-50/60 px-6 py-5 sm:px-7">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-orange-500 shadow-sm">
+                    <BrainCircuit size={22} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-orange-500">
+                      Machine Learning
+                    </p>
+                    <p className="mt-0.5 text-lg font-bold text-slate-900">
+                      CatBoost Risk Engine
+                    </p>
+                  </div>
                 </div>
-
-                <h2 className="mt-3 text-xl font-bold text-slate-900">
-                  Fraud Detection Intelligence
-                </h2>
-
-                <p className="mt-2 max-w-xl text-sm leading-6 text-slate-500">
-                  FraudLens AI uses a trained CatBoost classification model to
-                  evaluate transaction characteristics and estimate the
-                  probability of fraudulent activity.
-                </p>
-              </div>
-
-              <div className="hidden h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-violet-600 sm:flex">
-                <BrainCircuit size={22} />
+                <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-orange-600">
+                  14 FEATURES
+                </span>
               </div>
             </div>
 
-            {/* MODEL FLOW */}
+            <div className="p-6 sm:p-7">
+              <p className="text-sm leading-6 text-slate-500">
+                The trained CatBoost classifier receives transaction
+                characteristics and estimates the probability of fraudulent
+                activity. The resulting probability is used as decision
+                support before a user proceeds with a transaction.
+              </p>
 
-            <div className="mt-7 grid gap-3 sm:grid-cols-4">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <Database size={18} className="text-slate-600" />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Transaction
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-400">
-                  Input data
-                </p>
-              </div>
-
-              <div className="flex items-center justify-center sm:hidden">
-                <ChevronRight size={18} className="text-slate-300" />
-              </div>
-
-              <div className="rounded-xl border border-orange-100 bg-orange-50/50 p-4">
-                <SlidersHorizontal
-                  size={18}
-                  className="text-orange-500"
-                />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Features
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-400">
-                  14 parameters
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-violet-100 bg-violet-50/50 p-4">
-                <BrainCircuit
-                  size={18}
-                  className="text-violet-600"
-                />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  CatBoost
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-400">
-                  ML prediction
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
-                <ShieldCheck
-                  size={18}
-                  className="text-emerald-600"
-                />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Risk Score
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-400">
-                  Final assessment
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* THRESHOLD */}
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2">
-              <Target size={17} className="text-orange-500" />
-
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                Decision Threshold
-              </span>
-            </div>
-
-            <div className="mt-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-4xl font-bold tracking-tight text-slate-900">
-                    30%
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-500">
-                    Fraud probability threshold
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <SlidersHorizontal size={17} className="text-orange-500" />
+                  <p className="mt-3 text-xs font-bold">Input signals</p>
+                  <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                    Transaction, card, address and email attributes.
                   </p>
                 </div>
 
-                <CircleGauge size={30} className="text-orange-400" />
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <Target size={17} className="text-orange-500" />
+                  <p className="mt-3 text-xs font-bold">Risk threshold</p>
+                  <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                    Fraud probability threshold configured at 0.30.
+                  </p>
+                </div>
               </div>
 
-              <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-100">
-                <div className="h-full w-[30%] rounded-full bg-orange-500" />
-              </div>
-
-              <div className="mt-5 space-y-3">
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
-
-                    <span className="text-slate-500">
-                      Below 30%
-                    </span>
-                  </div>
-
-                  <span className="font-semibold text-emerald-600">
-                    Low Risk
-                  </span>
+              <div className="mt-5 flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3">
+                <Database size={17} className="text-slate-500" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold">Transaction → Features → CatBoost → Risk</p>
+                  <p className="mt-0.5 text-[10px] text-slate-400">
+                    Prediction pipeline
+                  </p>
                 </div>
-
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-amber-500" />
-
-                    <span className="text-slate-500">
-                      30% – 74%
-                    </span>
-                  </div>
-
-                  <span className="font-semibold text-amber-600">
-                    Medium Risk
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-red-500" />
-
-                    <span className="text-slate-500">
-                      75% and above
-                    </span>
-                  </div>
-
-                  <span className="font-semibold text-red-600">
-                    High Risk
-                  </span>
-                </div>
+                <ArrowRight size={16} className="text-orange-500" />
               </div>
             </div>
-          </div>
-        </section>
+          </article>
 
-        {/* ================= FEATURES ================= */}
+          <article className="overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-sm">
+            <div className="border-b border-emerald-100 bg-emerald-50/60 px-6 py-5 sm:px-7">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-emerald-600 shadow-sm">
+                    <MessageCircle size={22} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-600">
+                      Retrieval-Augmented Generation
+                    </p>
+                    <p className="mt-0.5 text-lg font-bold text-slate-900">
+                      FraudLens Safety Assistant
+                    </p>
+                  </div>
+                </div>
+                <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-emerald-700">
+                  RAG
+                </span>
+              </div>
+            </div>
 
-        <section
-          className={`mt-6 rounded-2xl border border-slate-200 bg-white shadow-sm transition-all delay-300 duration-700 ${
-            visible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-6 opacity-0"
-          }`}
-        >
-          {/* HEADER */}
+            <div className="p-6 sm:p-7">
+              <p className="text-sm leading-6 text-slate-500">
+                The assistant does not perform transaction-risk prediction.
+                It retrieves relevant information from the fraud-safety
+                knowledge base and gives practical guidance about UPI,
+                phishing, OTPs, payment scams, card security and suspicious
+                requests.
+              </p>
 
-          <div className="flex flex-col gap-4 border-b border-slate-100 p-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <FileSearch size={17} className="text-emerald-600" />
+                  <p className="mt-3 text-xs font-bold">Knowledge base</p>
+                  <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                    Curated fraud and financial-safety information.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <Search size={17} className="text-emerald-600" />
+                  <p className="mt-3 text-xs font-bold">Semantic retrieval</p>
+                  <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                    Finds relevant content by meaning, not only keywords.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3">
+                <Layers3 size={17} className="text-slate-500" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold">
+                    Question → Embedding → Vector Search → LLM → Answer
+                  </p>
+                  <p className="mt-0.5 text-[10px] text-slate-400">
+                    Retrieval-first response pipeline
+                  </p>
+                </div>
+                <ArrowRight size={16} className="text-emerald-600" />
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* RAG DEEP DIVE */}
+      <section className="border-y border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-12">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
             <div>
-              <div className="flex items-center gap-2">
-                <SlidersHorizontal
-                  size={17}
-                  className="text-orange-500"
-                />
-
-                <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                  Input Intelligence
+              <div className="mb-3 flex items-center gap-2">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-500">
+                  <Workflow size={17} />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                  Inside the assistant
                 </span>
               </div>
 
-              <h2 className="mt-2 text-xl font-bold text-slate-900">
-                Model Input Features
-              </h2>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Features used by the trained model for fraud prediction.
+              <p className="text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
+                Retrieval keeps the response connected to relevant knowledge.
               </p>
+
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                Documents are prepared into searchable chunks. Each chunk is
+                represented as an embedding and stored in MongoDB. When a user
+                asks something, the same embedding process is used for the
+                question and the closest knowledge is retrieved before the
+                language model generates its response.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {["Embeddings", "MongoDB Vector Search", "Semantic Retrieval", "LLM"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[10px] font-semibold text-slate-600"
+                    >
+                      {item}
+                    </span>
+                  )
+                )}
+              </div>
             </div>
 
-            {/* FILTER */}
-
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => {
-                const Icon = category.icon;
-                const active = activeCategory === category.name;
+            <div className="grid gap-3 sm:grid-cols-2">
+              {ragSteps.map((step, index) => {
+                const Icon = step.icon;
 
                 return (
-                  <button
-                    key={category.name}
-                    onClick={() => setActiveCategory(category.name)}
-                    className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-200 ${
-                      active
-                        ? "bg-slate-900 text-white shadow-sm"
-                        : "border border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-slate-800"
-                    }`}
+                  <div
+                    key={step.number}
+                    className="relative rounded-2xl border border-slate-200 bg-slate-50/70 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
                   >
-                    <Icon size={14} />
+                    <div className="flex items-start justify-between">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-orange-500 shadow-sm">
+                        <Icon size={17} />
+                      </div>
+                      <span className="text-[9px] font-bold tracking-widest text-slate-300">
+                        {step.number}
+                      </span>
+                    </div>
 
-                    {category.name}
-                  </button>
+                    <p className="mt-4 text-sm font-bold">{step.title}</p>
+                    <p className="mt-1.5 text-[11px] leading-5 text-slate-500">
+                      {step.text}
+                    </p>
+
+                    {index % 2 === 0 && (
+                      <ArrowRight
+                        size={14}
+                        className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 text-orange-400 sm:block"
+                      />
+                    )}
+                  </div>
                 );
               })}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* FEATURE GRID */}
+      {/* MODEL INPUTS */}
+      <section className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-12">
+        <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="border-b border-slate-100 px-6 py-5 sm:px-7">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
+                <SlidersHorizontal size={19} />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                  Model input space
+                </p>
+                <p className="mt-0.5 text-lg font-bold">What the CatBoost model receives</p>
+              </div>
+            </div>
+          </div>
 
-          <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredFeatures.map((feature, index) => (
+          <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
+            {modelFeatures.map(([name, category, description]) => (
               <div
-                key={feature.name}
-                className={`group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-200 hover:shadow-md ${
-                  visible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-3 opacity-0"
-                }`}
-                style={{
-                  transitionDelay: `${index * 30}ms`,
-                }}
+                key={name}
+                className="rounded-xl border border-slate-200 bg-slate-50/60 p-4"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-mono text-sm font-bold text-slate-800">
-                      {feature.name}
-                    </h3>
-
-                    <p className="mt-2 text-xs leading-5 text-slate-500">
-                      {feature.description}
-                    </p>
-                  </div>
-
-                  <span
-                    className={`shrink-0 rounded-md border px-2 py-1 text-[9px] font-bold ${
-                      categoryStyles[feature.category]
-                    }`}
-                  >
-                    {feature.category}
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-[11px] font-bold text-slate-800">
+                    {name}
+                  </span>
+                  <span className="rounded-md bg-white px-2 py-1 text-[8px] font-bold uppercase text-slate-400">
+                    {category}
                   </span>
                 </div>
+                <p className="mt-2 text-[10px] leading-4 text-slate-500">
+                  {description}
+                </p>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ================= HOW IT WORKS ================= */}
-
-        <section
-          className={`mt-6 grid gap-5 lg:grid-cols-2 transition-all delay-[400ms] duration-700 ${
-            visible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-6 opacity-0"
-          }`}
-        >
-          {/* PROCESS */}
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2">
-              <Workflow size={17} className="text-violet-600" />
-
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                Prediction Process
-              </span>
-            </div>
-
-            <h2 className="mt-3 text-lg font-bold text-slate-900">
-              How a transaction is evaluated
-            </h2>
-
-            <div className="mt-6 space-y-4">
-              {[
-                {
-                  number: "01",
-                  title: "Transaction Input",
-                  description:
-                    "Transaction details are collected from the user.",
-                },
-                {
-                  number: "02",
-                  title: "Feature Processing",
-                  description:
-                    "The required features are arranged in the format expected by the trained model.",
-                },
-                {
-                  number: "03",
-                  title: "ML Prediction",
-                  description:
-                    "The CatBoost classifier calculates the probability of fraudulent activity.",
-                },
-                {
-                  number: "04",
-                  title: "Risk Classification",
-                  description:
-                    "The probability is compared with the configured threshold to determine the risk level.",
-                },
-              ].map((step, index) => (
-                <div
-                  key={step.number}
-                  className="flex gap-4"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-[10px] font-bold text-white">
-                      {step.number}
-                    </div>
-
-                    {index !== 3 && (
-                      <div className="mt-2 h-full w-px bg-slate-200" />
-                    )}
-                  </div>
-
-                  <div className="pb-5">
-                    <h3 className="text-sm font-bold text-slate-800">
-                      {step.title}
-                    </h3>
-
-                    <p className="mt-1 text-xs leading-5 text-slate-500">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* MODEL CAPABILITY */}
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2">
-              <Zap size={17} className="text-orange-500" />
-
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                Model Capability
-              </span>
-            </div>
-
-            <h2 className="mt-3 text-lg font-bold text-slate-900">
-              What the model analyzes
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              The model evaluates multiple aspects of a transaction rather than
-              relying on a single value.
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
-                <Activity size={18} className="text-blue-600" />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Transaction
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-500">
-                  Amount, timing and product information
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-violet-100 bg-violet-50/50 p-4">
-                <CreditCard
-                  size={18}
-                  className="text-violet-600"
-                />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Card Signals
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-500">
-                  Card identifiers and payment type
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-amber-100 bg-amber-50/50 p-4">
-                <MapPin size={18} className="text-amber-600" />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Location
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-500">
-                  Address-related transaction information
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
-                <Mail size={18} className="text-emerald-600" />
-
-                <p className="mt-3 text-xs font-bold text-slate-800">
-                  Email Signals
-                </p>
-
-                <p className="mt-1 text-[10px] leading-4 text-slate-500">
-                  Purchaser and recipient domain patterns
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-5 rounded-xl border border-orange-100 bg-orange-50 p-4">
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-orange-500 shadow-sm">
-                  <ShieldCheck size={15} />
-                </div>
-
-                <div>
-                  <p className="text-xs font-bold text-slate-800">
-                    Decision Support
-                  </p>
-
-                  <p className="mt-1 text-[11px] leading-5 text-slate-500">
-                    FraudLens AI provides a risk assessment to support users in
-                    reviewing transactions before proceeding with a transfer.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= FOOTER STRIP ================= */}
-
-        <div
-          className={`mt-6 flex flex-col gap-3 rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition-all delay-500 duration-700 sm:flex-row sm:items-center sm:justify-between ${
-            visible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
-          }`}
-        >
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-white">
-              <GitBranch size={16} />
-            </div>
-
+      {/* RESPONSIBILITY */}
+      <section className="mx-auto max-w-7xl px-5 pb-10 sm:px-8 lg:px-10 lg:pb-14">
+        <div className="rounded-3xl bg-slate-950 p-7 sm:p-9">
+          <div className="grid gap-7 lg:grid-cols-[1fr_1.2fr] lg:items-center">
             <div>
-              <p className="text-xs font-bold text-slate-700">
-                Model Configuration
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-orange-400">
+                <ShieldCheck size={15} />
+                Design principle
+              </div>
+
+              <p className="mt-3 text-2xl font-bold leading-tight text-white">
+                Each AI component has a clear responsibility.
               </p>
 
-              <p className="mt-0.5 text-[11px] text-slate-400">
-                14 configured features · Fraud probability threshold: 0.30
+              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">
+                Keeping prediction and conversational guidance separate makes
+                the system easier to understand and keeps the assistant focused
+                on practical safety information.
               </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-orange-500/20 bg-orange-500/10 p-5">
+                <BrainCircuit size={19} className="text-orange-400" />
+                <p className="mt-4 text-sm font-bold text-white">
+                  Transaction risk
+                </p>
+                <p className="mt-2 text-[11px] leading-5 text-slate-400">
+                  CatBoost analyzes transaction features and produces a risk
+                  probability for decision support.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+                <MessageCircle size={19} className="text-emerald-400" />
+                <p className="mt-4 text-sm font-bold text-white">
+                  Fraud safety
+                </p>
+                <p className="mt-2 text-[11px] leading-5 text-slate-400">
+                  RAG retrieves relevant knowledge and the assistant turns it
+                  into practical safety guidance.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-[11px] font-medium text-emerald-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            Model service operational
+          <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-white/10 pt-5 text-[10px] text-slate-500">
+            <GitBranch size={14} />
+            <span>FraudLens AI architecture</span>
+            <span>·</span>
+            <span>ML prediction</span>
+            <span>+</span>
+            <span>RAG retrieval</span>
+            <span>+</span>
+            <span>LLM generation</span>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 };

@@ -227,123 +227,127 @@ const AnalyzeTransaction = () => {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white pt-20 text-slate-900">
+    <main className="min-h-screen overflow-hidden bg-[#f7f9fc] pt-20 text-slate-900">
+      {/* ================= MODERN PAGE HEADER ================= */}
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+        <div className="absolute -right-24 -top-32 h-80 w-80 rounded-full bg-orange-100/60 blur-3xl" />
+        <div className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-emerald-100/40 blur-3xl" />
 
-      {/* ================= PAGE HEADER ================= */}
-
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-9 sm:px-8 lg:px-10 lg:py-10">
-          <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-
-            {/* PAGE IDENTITY */}
-            <div
-              className={`max-w-3xl transition-all duration-700 ${
-                visible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-5 opacity-0"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-orange-100 bg-orange-50 text-orange-600">
-                  <ScanLine size={19} />
-                </div>
-
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                    Transaction Risk Screening
-                  </p>
-
-                  <div className="mt-1 flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                    <span className="text-xs font-medium text-slate-500">
-                      AI-powered pre-transfer assessment
-                    </span>
-                  </div>
-                </div>
+        <div className="relative mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-12">
+          <div
+            className={`flex flex-col gap-8 transition-all duration-700 lg:flex-row lg:items-end lg:justify-between ${
+              visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+            }`}
+          >
+            <div className="max-w-3xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-100 bg-orange-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-orange-600">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                AI Transaction Screening
               </div>
 
-              <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-                Check before you transfer.
+              <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                Check the risk
+                <span className="text-orange-500"> before you transfer.</span>
               </h1>
 
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg">
-                Review a transaction for potential fraud risk before proceeding
-                with a payment or money transfer.
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-500 sm:text-base">
+                Review transaction details with FraudLens AI and receive a
+                model-based fraud risk assessment before proceeding.
               </p>
 
-              <div className="mt-5 flex items-center gap-2 text-xs text-slate-400">
-                <ShieldCheck size={15} className="text-amber-600" />
-                <span>
-                  AI predictions are advisory and should not be the sole basis for critical decisions.
-                </span>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {[
+                  ["AI-powered", "Prediction"],
+                  ["14 signals", "Transaction data"],
+                  ["0.30", "Decision threshold"],
+                ].map(([value, label]) => (
+                  <div
+                    key={label}
+                    className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm"
+                  >
+                    <p className="text-xs font-bold text-slate-900">{value}</p>
+                    <p className="mt-0.5 text-[9px] text-slate-400">{label}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* PRIMARY ACTION */}
-            <div
-              className={`flex shrink-0 flex-col items-start gap-3 transition-all delay-150 duration-700 lg:items-end ${
-                visible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-5 opacity-0"
-              }`}
+            <button
+              onClick={openModal}
+              className="group flex shrink-0 items-center justify-center gap-3 rounded-2xl bg-slate-950 px-6 py-4 text-sm font-semibold text-white shadow-xl shadow-slate-900/10 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500 hover:shadow-orange-200 active:scale-[0.98]"
             >
-              <button
-                onClick={openModal}
-                className="group flex items-center gap-3 rounded-xl bg-slate-950 px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-200 active:scale-[0.98]"
-              >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 transition-all duration-300 group-hover:rotate-90 group-hover:bg-white/20">
-                  <Plus size={17} />
-                </span>
-
-                Start Risk Check
-              </button>
-
-              <p className="text-xs text-slate-400">
-                Enter details • Run model • Review risk
-              </p>
-            </div>
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10">
+                <Plus size={17} />
+              </span>
+              Start Risk Check
+              <ArrowRightIcon />
+            </button>
           </div>
         </div>
       </section>
 
+      {/* ================= INFORMATION STRIP ================= */}
+      <section className="border-b border-slate-200 bg-slate-50/80">
+        <div className="mx-auto grid max-w-7xl gap-3 px-5 py-5 sm:grid-cols-3 sm:px-8 lg:px-10">
+          {[
+            {
+              icon: ShieldCheck,
+              title: "Before you pay",
+              text: "Screen the transaction before proceeding.",
+            },
+            {
+              icon: BrainCircuit,
+              title: "Model-based",
+              text: "Risk is estimated from transaction signals.",
+            },
+            {
+              icon: CheckCircle2,
+              title: "Decision support",
+              text: "Use the result alongside your own verification.",
+            },
+          ].map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3"
+              >
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-orange-500">
+                  <Icon size={17} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-800">{item.title}</p>
+                  <p className="mt-0.5 text-[10px] text-slate-400">{item.text}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* ================= MODAL ================= */}
-
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-
-          {/* OVERLAY */}
-
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5">
           <div
             onClick={step === "form" ? closeModal : undefined}
-            className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-300"
+            className="absolute inset-0 bg-slate-950/65 backdrop-blur-md animate-in fade-in duration-300"
           />
 
-          {/* MODAL */}
-
-          <div className="animate-modal relative z-10 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-200 bg-white shadow-2xl">
-
-            {/* ================= FORM ================= */}
-
+          <div className="animate-modal relative z-10 flex max-h-[94vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-white/70 bg-white shadow-2xl">
+            {/* MODAL HEADER */}
             {step === "form" && (
               <>
-                {/* HEADER */}
-
-                <div className="sticky top-0 z-10 flex items-start justify-between border-b border-slate-100 bg-white px-6 py-5 sm:px-8">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50">
-                      <ScanLine
-                        size={18}
-                        className="text-orange-600"
-                      />
+                <div className="flex shrink-0 items-center justify-between border-b border-slate-100 bg-white px-5 py-4 sm:px-7">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-500">
+                      <ScanLine size={19} />
                     </div>
-
                     <div>
-                      <h2 className="font-bold text-slate-900">
-                        Transaction Details
-                      </h2>
-
-                      <p className="mt-0.5 text-xs text-slate-500">
-                        Enter transaction information for analysis
+                      <p className="text-sm font-bold text-slate-900">
+                        Transaction Risk Check
+                      </p>
+                      <p className="mt-0.5 text-[10px] text-slate-400">
+                        Enter the available transaction details
                       </p>
                     </div>
                   </div>
@@ -351,513 +355,413 @@ const AnalyzeTransaction = () => {
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900"
                     aria-label="Close"
                   >
                     <X size={18} />
                   </button>
                 </div>
 
-                {/* ERROR */}
-
                 {error && (
-                  <div className="mx-6 mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 sm:mx-8">
+                  <div className="mx-5 mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-medium text-red-600 sm:mx-7">
                     {error}
                   </div>
                 )}
 
-                {/* FORM */}
-
                 <form
-  onSubmit={handleAnalyze}
-  className="space-y-5 bg-slate-50/60 px-5 py-5 sm:px-7 sm:py-6"
->
-  {/* REQUIRED INFO */}
-  <div className="flex items-center gap-2 rounded-xl border border-orange-100 bg-orange-50 px-4 py-3">
-    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-orange-500 shadow-sm">
-      <ShieldCheck size={14} />
-    </div>
-
-    <p className="text-xs text-slate-600">
-      Fields marked with{" "}
-      <span className="font-bold text-red-500">*</span> are required for
-      analysis.
-    </p>
-  </div>
-
-  {/* ================= TRANSACTION DETAILS ================= */}
-
-  <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-    {/* SECTION HEADER */}
-
-    <div className="flex items-center justify-between border-b border-slate-100 bg-gradient-to-r from-orange-50/70 to-white px-5 py-4">
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
-          <CalendarDays size={18} />
-        </div>
-
-        <div>
-          <h3 className="text-sm font-bold text-slate-900">
-            Transaction Details
-          </h3>
-
-          <p className="mt-0.5 text-[11px] text-slate-500">
-            Basic information about this transaction
-          </p>
-        </div>
-      </div>
-
-      <span className="rounded-full bg-orange-100 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-orange-600">
-        Required
-      </span>
-    </div>
-
-    {/* FIELDS */}
-
-    <div className="grid gap-4 p-5 md:grid-cols-2">
-      {/* TRANSACTION DAY */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-          Transaction Day
-          <span className="text-red-500">*</span>
-        </label>
-
-        <input
-          type="number"
-          name="transactionDay"
-          min="1"
-          placeholder="e.g. 1"
-          value={formData.transactionDay}
-          onChange={handleChange}
-          required
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm text-slate-800 outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-
-        <p className="mt-1.5 text-[10px] text-slate-400">
-          Day number from the reference dataset
-        </p>
-      </div>
-
-      {/* TRANSACTION AMOUNT */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-          Transaction Amount
-          <span className="text-red-500">*</span>
-        </label>
-
-        <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50/40 px-4 transition-all duration-200 hover:border-slate-300 focus-within:bg-white focus-within:border-orange-400 focus-within:ring-4 focus-within:ring-orange-100">
-          <IndianRupee
-            size={16}
-            className="mr-2 shrink-0 text-slate-400"
-          />
-
-          <input
-            type="number"
-            name="transactionAmount"
-            min="0"
-            step="0.01"
-            placeholder="e.g. 1500"
-            value={formData.transactionAmount}
-            onChange={handleChange}
-            required
-            className="w-full bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
-          />
-        </div>
-      </div>
-
-      {/* PRODUCT CATEGORY */}
-
-      <div className="md:col-span-2">
-        <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-          Product Category
-          <span className="text-red-500">*</span>
-        </label>
-
-        <select
-          name="productCD"
-          value={formData.productCD}
-          onChange={handleChange}
-          required
-          className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm text-slate-700 outline-none transition-all duration-200 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        >
-          <option value="">Select transaction category</option>
-          <option value="W">W — Web / Online Transaction</option>
-          <option value="C">C — Card Transaction</option>
-          <option value="R">R — Retail Transaction</option>
-          <option value="H">H — Home Transaction</option>
-          <option value="S">S — Store Transaction</option>
-        </select>
-      </div>
-    </div>
-  </section>
-
-  {/* ================= CARD INFORMATION ================= */}
-
-  <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-    {/* HEADER */}
-
-    <div className="flex items-center justify-between border-b border-slate-100 bg-gradient-to-r from-violet-50/70 to-white px-5 py-4">
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-100 text-violet-600">
-          <CreditCard size={18} />
-        </div>
-
-        <div>
-          <h3 className="text-sm font-bold text-slate-900">
-            Card Information
-          </h3>
-
-          <p className="mt-0.5 text-[11px] text-slate-500">
-            Payment card attributes used by the model
-          </p>
-        </div>
-      </div>
-
-      <span className="hidden text-[10px] text-slate-400 sm:block">
-        Additional details improve context
-      </span>
-    </div>
-
-    <div className="grid gap-4 p-5 md:grid-cols-2">
-      {/* CARD 1 */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-          Card Identifier
-          <span className="text-red-500">*</span>
-        </label>
-
-        <input
-          type="number"
-          name="card1"
-          placeholder="Enter card identifier"
-          value={formData.card1}
-          onChange={handleChange}
-          required
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-      </div>
-
-      {/* CARD 2 */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Card Attribute 2
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <input
-          type="number"
-          name="card2"
-          placeholder="Optional value"
-          value={formData.card2}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-      </div>
-
-      {/* CARD 3 */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Card Attribute 3
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <input
-          type="number"
-          name="card3"
-          placeholder="Optional value"
-          value={formData.card3}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-      </div>
-
-      {/* CARD NETWORK */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Card Network
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <select
-          name="card4"
-          value={formData.card4}
-          onChange={handleChange}
-          className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        >
-          <option value="">Select card network</option>
-          <option value="visa">Visa</option>
-          <option value="mastercard">Mastercard</option>
-          <option value="american express">American Express</option>
-          <option value="discover">Discover</option>
-        </select>
-      </div>
-
-      {/* CARD 5 */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Card Attribute 5
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <input
-          type="number"
-          name="card5"
-          placeholder="Optional value"
-          value={formData.card5}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-      </div>
-
-      {/* CARD TYPE */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Card Type
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <select
-          name="card6"
-          value={formData.card6}
-          onChange={handleChange}
-          className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        >
-          <option value="">Select card type</option>
-          <option value="credit">Credit</option>
-          <option value="debit">Debit</option>
-          <option value="charge card">Charge Card</option>
-          <option value="debit or credit">Debit or Credit</option>
-        </select>
-      </div>
-    </div>
-  </section>
-
-  {/* ================= LOCATION ================= */}
-
-  <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-    <div className="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-blue-50/70 to-white px-5 py-4">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
-        <MapPin size={18} />
-      </div>
-
-      <div>
-        <h3 className="text-sm font-bold text-slate-900">
-          Location Information
-        </h3>
-
-        <p className="mt-0.5 text-[11px] text-slate-500">
-          Optional address and region identifiers
-        </p>
-      </div>
-    </div>
-
-    <div className="grid gap-4 p-5 md:grid-cols-2">
-      {/* ADDR1 */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Billing Location ID
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <input
-          type="number"
-          name="addr1"
-          placeholder="Enter location ID"
-          value={formData.addr1}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-      </div>
-
-      {/* ADDR2 */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Address Region ID
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <input
-          type="number"
-          name="addr2"
-          placeholder="Enter region ID"
-          value={formData.addr2}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        />
-      </div>
-    </div>
-  </section>
-
-  {/* ================= EMAIL ================= */}
-
-  <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-    <div className="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-emerald-50/70 to-white px-5 py-4">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
-        <Mail size={18} />
-      </div>
-
-      <div>
-        <h3 className="text-sm font-bold text-slate-900">
-          Email Information
-        </h3>
-
-        <p className="mt-0.5 text-[11px] text-slate-500">
-          Purchaser and recipient email domains
-        </p>
-      </div>
-    </div>
-
-    <div className="grid gap-4 p-5 md:grid-cols-2">
-      {/* PURCHASER EMAIL */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Purchaser Email Domain
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <select
-          name="P_emaildomain"
-          value={formData.P_emaildomain}
-          onChange={handleChange}
-          className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        >
-          <option value="">Select email domain</option>
-          <option value="gmail.com">gmail.com</option>
-          <option value="yahoo.com">yahoo.com</option>
-          <option value="hotmail.com">hotmail.com</option>
-          <option value="outlook.com">outlook.com</option>
-          <option value="icloud.com">icloud.com</option>
-          <option value="aol.com">aol.com</option>
-          <option value="protonmail.com">protonmail.com</option>
-        </select>
-      </div>
-
-      {/* RECIPIENT EMAIL */}
-
-      <div>
-        <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
-          Recipient Email Domain
-
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
-            Optional
-          </span>
-        </label>
-
-        <select
-          name="R_emaildomain"
-          value={formData.R_emaildomain}
-          onChange={handleChange}
-          className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50/40 px-4 py-3 text-sm outline-none transition-all duration-200 hover:border-slate-300 focus:bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-        >
-          <option value="">No recipient email</option>
-          <option value="gmail.com">gmail.com</option>
-          <option value="yahoo.com">yahoo.com</option>
-          <option value="hotmail.com">hotmail.com</option>
-          <option value="outlook.com">outlook.com</option>
-          <option value="icloud.com">icloud.com</option>
-          <option value="aol.com">aol.com</option>
-          <option value="protonmail.com">protonmail.com</option>
-        </select>
-
-        <p className="mt-1.5 text-[10px] text-slate-400">
-          Leave empty when recipient email information is unavailable
-        </p>
-      </div>
-    </div>
-  </section>
-
-  {/* ================= SUBMIT ================= */}
-
-  <div className="sticky bottom-0 -mx-5 border-t border-slate-200 bg-white/95 px-5 py-4 backdrop-blur sm:-mx-7 sm:px-7">
-    <div className="flex items-center justify-between gap-4">
-      <p className="hidden max-w-sm text-[11px] leading-5 text-slate-400 sm:block">
-        FraudLens AI evaluates transaction patterns and provides an advisory
-        risk assessment.
-      </p>
-
-      <button
-        type="submit"
-        className="group ml-auto flex items-center gap-2.5 rounded-xl bg-slate-950 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-slate-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-200 active:translate-y-0"
-      >
-        <BrainCircuit
-          size={17}
-          className="transition-transform duration-300 group-hover:rotate-12"
-        />
-
-        Analyze Transaction
-
-        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-sm transition-transform duration-300 group-hover:translate-x-0.5">
-          →
-        </span>
-      </button>
-    </div>
-  </div>
-</form>
+                  onSubmit={handleAnalyze}
+                  className="min-h-0 overflow-y-auto bg-[#f7f9fc] px-4 py-5 sm:px-6 sm:py-6"
+                >
+                  <div className="space-y-4">
+                    {/* INTRO */}
+                    <div className="rounded-2xl border border-orange-100 bg-gradient-to-r from-orange-50 via-white to-white p-4 sm:p-5">
+                      <div className="flex gap-3">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-orange-500 shadow-sm">
+                          <ShieldCheck size={18} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-slate-900">
+                            Before you transfer
+                          </p>
+                          <p className="mt-1 text-[11px] leading-5 text-slate-500">
+                            Provide the transaction information available to
+                            you. FraudLens will evaluate the supplied signals
+                            and return an estimated risk level.
+                          </p>
+                          <p className="mt-2 text-[10px] text-slate-400">
+                            <span className="font-bold text-red-500">*</span>{" "}
+                            Required fields
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* TRANSACTION */}
+                    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <div className="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-500">
+                          <CalendarDays size={17} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold">Transaction Details</p>
+                          <p className="text-[10px] text-slate-400">
+                            Basic information about the payment
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-4 p-5 md:grid-cols-2">
+                        <div>
+                          <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                            Transaction Date
+                            <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="date"
+                            name="transactionDate"
+                            value={formData.transactionDate || ""}
+                            onChange={handleChange}
+                            min={new Date().toISOString().split("T")[0]}
+                            required
+                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          />
+                          <p className="mt-1.5 text-[10px] text-slate-400">
+                            When are you making this transaction?
+                          </p>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                            Transaction Amount
+                            <span className="text-red-500">*</span>
+                          </label>
+                          <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50 px-3.5 transition focus-within:border-orange-400 focus-within:bg-white focus-within:ring-4 focus-within:ring-orange-100">
+                            <IndianRupee size={16} className="mr-2 text-slate-400" />
+                            <input
+                              type="number"
+                              name="transactionAmount"
+                              min="1"
+                              step="0.01"
+                              placeholder="e.g. 2,500"
+                              value={formData.transactionAmount}
+                              onChange={handleChange}
+                              required
+                              className="w-full bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
+                            />
+                          </div>
+                          <p className="mt-1.5 text-[10px] text-slate-400">
+                            Enter the amount you plan to transfer or pay
+                          </p>
+                        </div>
+
+                        <div className="md:col-span-2">
+                          <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                            Where are you making this payment?
+                            <span className="text-red-500">*</span>
+                          </label>
+                          <select
+                            name="productCD"
+                            value={formData.productCD}
+                            onChange={handleChange}
+                            required
+                            className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          >
+                            <option value="">Select payment type</option>
+                            <option value="W">Online / Website</option>
+                            <option value="C">Card Payment</option>
+                            <option value="R">Retail / Merchant</option>
+                            <option value="H">Home / Personal Payment</option>
+                            <option value="S">Store Payment</option>
+                          </select>
+                          <p className="mt-1.5 text-[10px] text-slate-400">
+                            Choose the option that best describes your transaction
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+
+                    {/* PAYMENT */}
+                    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <div className="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-50 text-violet-600">
+                          <CreditCard size={17} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold">Payment Information</p>
+                          <p className="text-[10px] text-slate-400">
+                            Details related to the payment card
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-4 p-5 md:grid-cols-2">
+                        <div>
+                          <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                            Card Network
+                            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                              Optional
+                            </span>
+                          </label>
+                          <select
+                            name="card4"
+                            value={formData.card4}
+                            onChange={handleChange}
+                            className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          >
+                            <option value="">Select card network</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="american express">American Express</option>
+                            <option value="discover">Discover</option>
+                          </select>
+                          <p className="mt-1.5 text-[10px] text-slate-400">
+                            The network shown on your card
+                          </p>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                            Payment Card Type
+                            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                              Optional
+                            </span>
+                          </label>
+                          <select
+                            name="card6"
+                            value={formData.card6}
+                            onChange={handleChange}
+                            className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          >
+                            <option value="">Select card type</option>
+                            <option value="credit">Credit Card</option>
+                            <option value="debit">Debit Card</option>
+                            <option value="charge card">Charge Card</option>
+                            <option value="debit or credit">Debit or Credit</option>
+                          </select>
+                          <p className="mt-1.5 text-[10px] text-slate-400">
+                            Choose the type of card being used
+                          </p>
+                        </div>
+
+                        <div className="md:col-span-2">
+                          <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                            Card Reference
+                            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                              Optional
+                            </span>
+                          </label>
+                          <input
+                            type="number"
+                            name="card1"
+                            placeholder="Enter your card reference number"
+                            value={formData.card1}
+                            onChange={handleChange}
+                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          />
+                          <div className="mt-2 flex items-start gap-2 rounded-lg bg-slate-50 px-3 py-2">
+                            <ShieldCheck size={13} className="mt-0.5 shrink-0 text-slate-400" />
+                            <p className="text-[10px] leading-4 text-slate-400">
+                              Use a reference value only.{" "}
+                              <strong>
+                                Do not enter your full card number, CVV, PIN, or password.
+                              </strong>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    {/* EMAIL */}
+                    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <div className="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                          <Mail size={17} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold">Email Information</p>
+                          <p className="text-[10px] text-slate-400">
+                            Email providers associated with the transaction
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-4 p-5 md:grid-cols-2">
+                        <div>
+                          <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                            Your Email Provider
+                            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                              Optional
+                            </span>
+                          </label>
+                          <select
+                            name="P_emaildomain"
+                            value={formData.P_emaildomain}
+                            onChange={handleChange}
+                            className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          >
+                            <option value="">Select email provider</option>
+                            <option value="gmail.com">Gmail</option>
+                            <option value="yahoo.com">Yahoo</option>
+                            <option value="hotmail.com">Hotmail</option>
+                            <option value="outlook.com">Outlook</option>
+                            <option value="icloud.com">iCloud</option>
+                            <option value="aol.com">AOL</option>
+                            <option value="protonmail.com">ProtonMail</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                            Recipient Email Provider
+                            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                              Optional
+                            </span>
+                          </label>
+                          <select
+                            name="R_emaildomain"
+                            value={formData.R_emaildomain}
+                            onChange={handleChange}
+                            className="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                          >
+                            <option value="">No recipient email</option>
+                            <option value="gmail.com">Gmail</option>
+                            <option value="yahoo.com">Yahoo</option>
+                            <option value="hotmail.com">Hotmail</option>
+                            <option value="outlook.com">Outlook</option>
+                            <option value="icloud.com">iCloud</option>
+                            <option value="aol.com">AOL</option>
+                            <option value="protonmail.com">ProtonMail</option>
+                          </select>
+                          <p className="mt-1.5 text-[10px] text-slate-400">
+                            Select "No recipient email" if it does not apply
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+
+                    {/* LOCATION */}
+                    <details className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                            <MapPin size={17} />
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold">Location Details</p>
+                            <p className="text-[10px] text-slate-400">
+                              Optional transaction context
+                            </p>
+                          </div>
+                        </div>
+                        <ChevronDownIcon />
+                      </summary>
+
+                      <div className="border-t border-slate-100 p-5">
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <div>
+                            <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                              Billing Location Reference
+                              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                                Optional
+                              </span>
+                            </label>
+                            <input
+                              type="number"
+                              name="addr1"
+                              placeholder="Optional reference"
+                              value={formData.addr1}
+                              onChange={handleChange}
+                              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                            />
+                            <p className="mt-1.5 text-[10px] text-slate-400">
+                              Use a reference value, not your full address
+                            </p>
+                          </div>
+
+                          <div>
+                            <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
+                              Region Reference
+                              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-medium text-slate-400">
+                                Optional
+                              </span>
+                            </label>
+                            <input
+                              type="number"
+                              name="addr2"
+                              placeholder="Optional reference"
+                              value={formData.addr2}
+                              onChange={handleChange}
+                              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                            />
+                            <p className="mt-1.5 text-[10px] text-slate-400">
+                              No need to enter your actual address
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </details>
+
+                    {/* PRIVACY */}
+                    <div className="flex items-start gap-3 rounded-xl border border-emerald-100 bg-emerald-50/50 px-4 py-3">
+                      <ShieldCheck size={16} className="mt-0.5 shrink-0 text-emerald-600" />
+                      <p className="text-[10px] leading-5 text-emerald-800/70">
+                        For your security, never enter sensitive information
+                        such as your full card number, CVV, PIN, password, or
+                        banking credentials.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* SUBMIT */}
+                  <div className="sticky bottom-0 mt-5 border-t border-slate-200 bg-[#f7f9fc]/95 pt-4 backdrop-blur">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="hidden sm:block">
+                        <p className="text-xs font-semibold text-slate-700">
+                          Ready to check this transaction?
+                        </p>
+                        <p className="mt-0.5 text-[10px] text-slate-400">
+                          Get an AI-powered risk assessment.
+                        </p>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-500 hover:shadow-orange-200 active:scale-[0.98] sm:w-auto"
+                      >
+                        <BrainCircuit size={17} />
+                        Check Transaction Risk
+                        <span className="transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </>
             )}
 
             {/* ================= ANALYZING ================= */}
-
             {step === "analyzing" && (
-              <div className="flex min-h-[520px] flex-col items-center justify-center px-6 text-center">
-
+              <div className="flex min-h-[540px] flex-col items-center justify-center bg-white px-6 text-center">
                 <div className="relative flex h-28 w-28 items-center justify-center">
                   <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-r-orange-500 border-t-orange-500" />
-
-                  <div className="absolute inset-3 animate-[spin_3s_linear_infinite_reverse] rounded-full border border-green-500/40" />
-
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-950 shadow-xl shadow-slate-900/20">
-                    <BrainCircuit
-                      size={28}
-                      className="animate-pulse text-orange-400"
-                    />
+                  <div className="absolute inset-3 animate-[spin_3s_linear_infinite_reverse] rounded-full border border-emerald-500/40" />
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-950 shadow-xl">
+                    <BrainCircuit size={28} className="animate-pulse text-orange-400" />
                   </div>
                 </div>
 
-                <h2 className="mt-10 text-2xl font-bold text-slate-900">
+                <p className="mt-9 text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500">
+                  FraudLens AI
+                </p>
+                <h2 className="mt-2 text-2xl font-bold text-slate-900">
                   Analyzing transaction
                 </h2>
-
-                <p className="mt-3 text-sm text-slate-500">
-                  Our ML engine is evaluating transaction patterns
+                <p className="mt-2 text-sm text-slate-500">
+                  Evaluating transaction patterns and risk signals
                 </p>
 
-                <div className="mt-8 space-y-3 text-left">
+                <div className="mt-8 w-full max-w-xs space-y-3 text-left">
                   {[
                     "Extracting transaction features",
                     "Detecting behavioral anomalies",
@@ -865,25 +769,21 @@ const AnalyzeTransaction = () => {
                   ].map((item, index) => (
                     <div
                       key={item}
-                      className="flex items-center gap-3 text-sm text-slate-600"
+                      className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-xs text-slate-600"
                     >
                       <div
                         className={`flex h-6 w-6 items-center justify-center rounded-full ${
                           index === 2
                             ? "bg-orange-100 text-orange-600"
-                            : "bg-green-100 text-green-600"
+                            : "bg-emerald-100 text-emerald-600"
                         }`}
                       >
                         {index === 2 ? (
-                          <Loader2
-                            size={14}
-                            className="animate-spin"
-                          />
+                          <Loader2 size={13} className="animate-spin" />
                         ) : (
-                          <CheckCircle2 size={14} />
+                          <CheckCircle2 size={13} />
                         )}
                       </div>
-
                       {item}
                     </div>
                   ))}
@@ -892,183 +792,175 @@ const AnalyzeTransaction = () => {
             )}
 
             {/* ================= RESULT ================= */}
+            {step === "result" &&
+              result &&
+              (() => {
+                const styles = getRiskStyles(result.riskLevel);
 
-            {step === "result" && result && (() => {
-              const styles = getRiskStyles(result.riskLevel);
-
-              return (
-                <div className="animate-result">
-
-                  {/* RESULT HEADER */}
-
-                  <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5 sm:px-8">
-
-                    <div className="flex items-center gap-3">
-
-                      <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-xl ${styles.iconBg}`}
-                      >
-                        <AlertTriangle size={20} />
-                      </div>
-
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                          Analysis Complete
-                        </p>
-
-                        <h2 className="font-bold text-slate-900">
-                          Fraud Risk Assessment
-                        </h2>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={closeModal}
-                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
-                    >
-                      <X size={18} />
-                    </button>
-                  </div>
-
-                  <div className="px-6 py-8 sm:px-8">
-
-                    {/* SCORE */}
-
-                    <div className="text-center">
-
-                      <div
-                        className={`relative mx-auto flex h-40 w-40 items-center justify-center rounded-full border-[10px] ${styles.outerRing}`}
-                      >
+                return (
+                  <div className="animate-result bg-[#f8fafc]">
+                    <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-4 sm:px-7">
+                      <div className="flex items-center gap-3">
                         <div
-                          className={`absolute inset-2 animate-spin rounded-full border-[6px] border-t-orange-400 ${styles.ring}`}
-                        />
-
-                        <div>
-                          <p className="text-4xl font-bold text-slate-900">
-                            {Number(result.fraudProbability).toFixed(2)}%
-                          </p>
-
-                          <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                            Fraud Risk
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="mt-6">
-
-                        <span
-                          className={`inline-flex rounded-full px-4 py-2 text-xs font-bold tracking-wider ${styles.badge}`}
+                          className={`flex h-10 w-10 items-center justify-center rounded-xl ${styles.iconBg}`}
                         >
-                          {result.riskLevel} RISK
-                        </span>
-
-                        <p className="mx-auto mt-3 max-w-md text-sm text-slate-500">
-                          {styles.message}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* MODEL DETAILS */}
-
-                    <div className="mt-8 border-t border-slate-100 pt-6">
-
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
-                        Model Assessment
-                      </p>
-
-                      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-
-                        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                          <p className="text-xs text-slate-400">
-                            Prediction
-                          </p>
-
-                          <p className="mt-1 text-sm font-bold text-slate-800">
-                            {result.prediction === 1
-                              ? "Potential Fraud"
-                              : "Legitimate Transaction"}
-                          </p>
+                          <AlertTriangle size={19} />
                         </div>
-
-                        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                          <p className="text-xs text-slate-400">
-                            Detection Threshold
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                            Analysis complete
                           </p>
-
-                          <p className="mt-1 text-sm font-bold text-slate-800">
-                            {result.threshold}%
+                          <p className="mt-0.5 text-sm font-bold text-slate-900">
+                            Fraud Risk Assessment
                           </p>
                         </div>
                       </div>
-                    </div>
-
-                    {/* ACTIONS */}
-
-                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
-
-                      <button
-                        onClick={analyzeAgain}
-                        className="flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-                      >
-                        <RotateCcw size={16} />
-
-                        Analyze Another
-                      </button>
 
                       <button
                         onClick={closeModal}
-                        className="rounded-xl bg-slate-950 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-600"
+                        className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900"
                       >
-                        Done
+                        <X size={18} />
                       </button>
                     </div>
+
+                    <div className="px-5 py-8 sm:px-8">
+                      <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+                        <div className="text-center">
+                          <div
+                            className={`relative mx-auto flex h-44 w-44 items-center justify-center rounded-full border-[10px] ${styles.outerRing} bg-white shadow-sm`}
+                          >
+                            <div
+                              className={`absolute inset-2 animate-spin rounded-full border-[5px] border-t-orange-400 ${styles.ring}`}
+                            />
+                            <div>
+                              <p className="text-4xl font-bold tracking-tight text-slate-900">
+                                {Number(result.fraudProbability).toFixed(2)}%
+                              </p>
+                              <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                Fraud Risk
+                              </p>
+                            </div>
+                          </div>
+
+                          <span
+                            className={`mt-5 inline-flex rounded-full px-4 py-2 text-xs font-bold tracking-wider ${styles.badge}`}
+                          >
+                            {result.riskLevel} RISK
+                          </span>
+
+                          <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-500">
+                            {styles.message}
+                          </p>
+                        </div>
+
+                        <div>
+                          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                            <div className="flex items-center gap-2">
+                              <BrainCircuit size={17} className="text-orange-500" />
+                              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+                                Model Assessment
+                              </p>
+                            </div>
+
+                            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                              <div className="rounded-xl bg-slate-50 p-4">
+                                <p className="text-[10px] text-slate-400">
+                                  Prediction
+                                </p>
+                                <p className="mt-1 text-sm font-bold text-slate-800">
+                                  {result.prediction === 1
+                                    ? "Potential Fraud"
+                                    : "Legitimate Transaction"}
+                                </p>
+                              </div>
+
+                              <div className="rounded-xl bg-slate-50 p-4">
+                                <p className="text-[10px] text-slate-400">
+                                  Detection Threshold
+                                </p>
+                                <p className="mt-1 text-sm font-bold text-slate-800">
+                                  {result.threshold}%
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3">
+                            <div className="flex items-start gap-2">
+                              <ShieldCheck size={15} className="mt-0.5 text-amber-600" />
+                              <p className="text-[10px] leading-5 text-amber-800/75">
+                                This is an AI-generated assessment. Verify
+                                suspicious payment requests independently and
+                                never share sensitive credentials.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-7 grid gap-3 border-t border-slate-200 pt-6 sm:grid-cols-2">
+                        <button
+                          onClick={analyzeAgain}
+                          className="flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                        >
+                          <RotateCcw size={16} />
+                          Analyze Another
+                        </button>
+
+                        <button
+                          onClick={closeModal}
+                          className="rounded-xl bg-slate-950 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-600"
+                        >
+                          Done
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              );
-            })()}
+                );
+              })()}
           </div>
         </div>
       )}
 
-      {/* ================= FEATURE STRIP ================= */}
-
-      <section className="border-t border-slate-100 bg-slate-50/60">
-
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-10 sm:grid-cols-3 sm:px-8 lg:px-10">
-
-          <div className="text-center">
-            <p className="text-sm font-bold text-slate-900">
-              Real-Time Prediction
-            </p>
-
-            <p className="mt-2 text-xs leading-5 text-slate-500">
-              Instant fraud probability calculation
-            </p>
-          </div>
-
-          <div className="text-center sm:border-x sm:border-slate-200">
-            <p className="text-sm font-bold text-slate-900">
-              Explainable AI
-            </p>
-
-            <p className="mt-2 text-xs leading-5 text-slate-500">
-              Model-driven transaction risk assessment
-            </p>
-          </div>
-
-          <div className="text-center">
-            <p className="text-sm font-bold text-slate-900">
-              Risk Intelligence
-            </p>
-
-            <p className="mt-2 text-xs leading-5 text-slate-500">
-              Identify anomalies before they become threats
-            </p>
-          </div>
+      {/* ================= BOTTOM FEATURE STRIP ================= */}
+      <section className="border-t border-slate-200 bg-white">
+        <div className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:grid-cols-3 sm:px-8 lg:px-10">
+          {[
+            ["Real-Time Prediction", "Instant fraud probability calculation", BrainCircuit],
+            ["Explainable Assessment", "Model-driven transaction risk analysis", ScanLine],
+            ["Risk Intelligence", "Identify suspicious patterns before proceeding", ShieldCheck],
+          ].map(([title, text, Icon], index) => (
+            <div
+              key={title}
+              className={`flex items-start gap-3 px-2 ${
+                index !== 0 ? "sm:border-l sm:border-slate-200 sm:pl-6" : ""
+              }`}
+            >
+              <Icon size={18} className="mt-0.5 shrink-0 text-orange-500" />
+              <div>
+                <p className="text-xs font-bold text-slate-900">{title}</p>
+                <p className="mt-1 text-[10px] leading-5 text-slate-400">{text}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </main>
   );
 };
+
+/* Small local UI helpers — presentation only. */
+const ArrowRightIcon = () => (
+  <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
+    →
+  </span>
+);
+
+const ChevronDownIcon = () => (
+  <span className="text-slate-400 transition-transform duration-200 group-open:rotate-180">
+    ↓
+  </span>
+);
 
 export default AnalyzeTransaction;

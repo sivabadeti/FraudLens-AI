@@ -9,6 +9,10 @@ import {
   Bell,
   Activity,
   FileSearch,
+  MessageCircle,
+  Search,
+  Sparkles,
+  Layers3,
 } from "lucide-react";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -52,6 +56,33 @@ const Home = () => {
         "Get actionable guidance to proceed, verify, or review before transacting.",
       color: "text-orange-500",
       bg: "bg-orange-50",
+    },
+  ];
+
+  const ragFeatures = [
+    {
+      icon: FileSearch,
+      title: "Knowledge-Grounded Answers",
+      description:
+        "Retrieves relevant fraud-safety knowledge before generating an answer, helping the assistant stay grounded in trusted information.",
+    },
+    {
+      icon: Search,
+      title: "Semantic Search",
+      description:
+        "Understands the meaning behind your question instead of relying only on exact keyword matches.",
+    },
+    {
+      icon: MessageCircle,
+      title: "FraudLens Assistant",
+      description:
+        "Provides practical guidance about UPI, phishing, OTPs, payment scams, card security, and what to do after suspected fraud.",
+    },
+    {
+      icon: Layers3,
+      title: "RAG Pipeline",
+      description:
+        "Combines document retrieval, embeddings, MongoDB Vector Search, and an LLM to produce contextual responses.",
     },
   ];
 
@@ -302,8 +333,8 @@ const Home = () => {
           </div>
         </section>
 
-        {/* FEATURES */}
-        <section className="mx-auto max-w-7xl px-5 py-28 sm:px-8 lg:px-10">
+        {/* RAG / AI ASSISTANT */}
+       <section className="relative overflow-hidden border-y border-slate-100 bg-white px-5 pt-10 pb-24 sm:px-8 lg:px-10">
           <div className="mb-14 text-center">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-orange-500">
               Smarter Transaction Decisions
@@ -340,6 +371,223 @@ const Home = () => {
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        {/* RAG / AI ASSISTANT */}
+        {/* RAG / AI ASSISTANT */}
+      <section className="relative overflow-hidden border-y border-slate-100 bg-white px-5 pt-2 pb-24 sm:px-8 lg:px-10">
+          <div className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-orange-100/50 blur-3xl" />
+          <div className="absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-green-100/40 blur-3xl" />
+
+          <div className="relative mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-orange-500">
+                Retrieval-Augmented Generation
+              </p>
+
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                More than a chatbot.
+                <br />
+                <span className="text-green-700">Knowledge-grounded fraud guidance.</span>
+              </h2>
+
+              <p className="mt-5 text-sm leading-7 text-slate-500 sm:text-base">
+                FraudLens Assistant uses RAG to retrieve relevant financial
+                safety knowledge and provide clear, contextual guidance.
+                It complements the transaction risk model rather than
+                replacing it.
+              </p>
+            </div>
+
+            {/* Architecture flow */}
+            <div className="mt-14 rounded-3xl border border-slate-200 bg-slate-50/70 p-6 shadow-sm sm:p-8">
+              <div className="mb-7 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-500">
+                  <Sparkles size={22} />
+                </div>
+
+                <div>
+                  <h3 className="text-base font-bold text-slate-900">
+                    How the FraudLens RAG Assistant works
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500">
+                    A retrieval-first pipeline for contextual safety guidance
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-5">
+                {[
+                  {
+                    number: "01",
+                    title: "User Question",
+                    description: "Your fraud-safety question",
+                  },
+                  {
+                    number: "02",
+                    title: "Embedding",
+                    description: "Question converted to a vector",
+                  },
+                  {
+                    number: "03",
+                    title: "Vector Search",
+                    description: "Relevant knowledge retrieved",
+                  },
+                  {
+                    number: "04",
+                    title: "LLM",
+                    description: "Context turned into an answer",
+                  },
+                  {
+                    number: "05",
+                    title: "Guidance",
+                    description: "Clear, practical response",
+                  },
+                ].map((item, index, items) => (
+                  <div key={item.number} className="relative">
+                    <div className="h-full rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md">
+                      <span className="text-[10px] font-bold tracking-widest text-orange-500">
+                        {item.number}
+                      </span>
+
+                      <h4 className="mt-3 text-sm font-bold text-slate-900">
+                        {item.title}
+                      </h4>
+
+                      <p className="mt-2 text-xs leading-5 text-slate-500">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {index !== items.length - 1 && (
+                      <ArrowRight
+                        size={15}
+                        className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-green-600 md:block"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RAG CTA */}
+            <div className="relative mt-8 overflow-hidden rounded-3xl bg-slate-950 px-7 py-9 shadow-xl sm:px-10 lg:px-12">
+              <div className="absolute -right-16 -top-20 h-52 w-52 rounded-full bg-orange-500/10 blur-3xl" />
+              <div className="absolute -bottom-20 right-32 h-52 w-52 rounded-full bg-green-500/10 blur-3xl" />
+
+              <div className="relative flex flex-col items-start justify-between gap-7 lg:flex-row lg:items-center">
+                <div className="max-w-2xl">
+                  <div className="mb-4 h-1 w-10 rounded-full bg-orange-500" />
+
+                  <h3 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
+                    Have a fraud-safety question?
+                    <span className="block text-green-400">
+                      Ask FraudLens Assistant.
+                    </span>
+                  </h3>
+
+                  <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400 sm:text-base">
+                    Get practical guidance on UPI, phishing, OTPs, payment
+                    scams, card security, and suspicious requests using
+                    FraudLens's knowledge-grounded AI assistant.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    document
+                      .querySelector(
+                        '[aria-label="Open FraudLens Assistant"]'
+                      )
+                      ?.click()
+                  }
+                  className="group flex shrink-0 items-center gap-3 rounded-lg bg-orange-500 px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-600 hover:shadow-xl"
+                >
+                  Ask the Assistant
+
+                  <MessageCircle
+                    size={18}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </button>
+              </div>
+            </div>
+
+            {/* RAG capabilities */}
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {ragFeatures.map((feature) => {
+                const Icon = feature.icon;
+
+                return (
+                  <div
+                    key={feature.title}
+                    className="group rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg"
+                  >
+                    <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-green-50 text-green-700 transition-transform duration-300 group-hover:scale-110">
+                      <Icon size={21} />
+                    </div>
+
+                    <h3 className="text-base font-bold text-slate-900">
+                      {feature.title}
+                    </h3>
+
+                    <p className="mt-2.5 text-sm leading-6 text-slate-500">
+                      {feature.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ML vs RAG distinction */}
+            <div className="mt-8 grid gap-5 lg:grid-cols-2">
+              <div className="rounded-2xl border border-orange-100 bg-orange-50/60 p-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-orange-500 shadow-sm">
+                    <BrainCircuit size={20} />
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500">
+                      ML Model
+                    </p>
+                    <h3 className="text-base font-bold text-slate-900">
+                      Transaction Risk Prediction
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-slate-600">
+                  Analyzes transaction patterns and estimates the potential
+                  fraud risk before you proceed.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-green-100 bg-green-50/60 p-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-green-700 shadow-sm">
+                    <MessageCircle size={20} />
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-green-700">
+                      RAG Assistant
+                    </p>
+                    <h3 className="text-base font-bold text-slate-900">
+                      Fraud-Safety Guidance
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-slate-600">
+                  Retrieves relevant safety knowledge and explains what you
+                  can do about scams, suspicious requests, and payment
+                  security.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -396,7 +644,8 @@ const Home = () => {
         </section>
 
         {/* CTA */}
-        <section className="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8 lg:px-10">
+        {/* FEATURES */}
+        <section className="mx-auto max-w-7xl px-5 pt-28 pb-2 sm:px-8 lg:px-10">
           <div className="relative overflow-hidden rounded-3xl bg-slate-950 px-8 py-14 sm:px-14 lg:px-16">
             {/* Decorations */}
             <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-green-500/10 blur-3xl" />

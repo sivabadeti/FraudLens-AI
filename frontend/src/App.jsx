@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import AnalyzeTransaction from "./pages/AnalyzeTransaction";
 import LiveMonitor from "./pages/LiveMonitor";
 import ModelInsights from "./pages/ModelInsights";
+import Assistant from "./components/Assistant";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/monitor" element={<LiveMonitor/>}/>
         <Route path="/insights" element={<ModelInsights/>}/>
       </Routes>
+      <Assistant />
     </>
   );
 }
